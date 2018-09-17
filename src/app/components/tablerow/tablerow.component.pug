@@ -1,0 +1,16 @@
+div(class='table_row')
+    div(class='row--left')
+        div(class='avatar')
+            img(src="assets/avatar.jpg")
+        span(class='leader-name') {{username}}
+    div(class='row--right')
+        div(class='value' '*ngIf'="value[3] != ''") {{value[3]}}/{{value[2]}}
+        div(class='value' '*ngIf'="value[3] === ''") &nbsp;
+        div(class='value') {{value[0] | numbers}}/{{value[1] | numbers}}
+        div(class='value') {{value[4]}}
+        div(class='cup' '[ngSwitch]'='place')
+            img('*ngSwitchCase'='1' src='assets/gold.svg')
+            img('*ngSwitchCase'='2' src='assets/silver.svg')
+            img('*ngSwitchCase'='3' src='assets/bronze.svg')
+            div('*ngSwitchDefault')
+

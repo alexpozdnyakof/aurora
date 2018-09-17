@@ -1,0 +1,57 @@
+@mixin text-crop-number($line-height: 1.14, $top-adjustment: 0px, $bottom-adjustment: 0px) {
+    // Configured in Step 1
+    $top-crop: 12;
+    $bottom-crop: 8;
+    $crop-font-size: 56;
+    $crop-line-height: 1.14;
+    // Apply values to calculate em-based margins that work with any font size
+    $dynamic-top-crop: max(($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
+    $dynamic-bottom-crop: max(($bottom-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
+    // Mixin output
+    line-height: $line-height;
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        height: 0;
+        width: 0;
+    }
+    &::before {
+        margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
+    }
+    &::after {
+        margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
+    }
+}
+
+.card {
+    width: 100%;
+    height: 100%;
+    border-radius: 8px;
+    background-color: var(--card-color);
+    box-shadow: var(--card-shadow);
+    position: relative;
+    .title {
+        position: absolute;
+        font-size: 13px;
+        line-height: 32px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: .4px;
+        color: var(--color-main);
+        top: 24px;
+        left: 32px;
+    }
+    .value {
+        position: absolute;
+        bottom: 40px;
+        left: 32px;
+        span {
+            font-size: 56px;
+            line-height: 64px;
+            font-weight: 500;
+            letter-spacing: -1px;
+            color: #3B3C40;
+        }
+    }
+}

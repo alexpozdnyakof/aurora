@@ -1,0 +1,198 @@
+.wrapper {
+    background-color: var(--background-color);
+    width: 100%;
+    height: 100%;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    padding-left: 178px;
+    padding-top: 72px;
+    box-sizing: border-box;
+}
+
+.logo {
+    height: 56px;
+    width: 100%;
+    margin-bottom: 64px;
+    position: relative;
+    img {
+        height: 56px;
+    }
+}
+
+.header__global {
+    width: 100%;
+    height: 48px;
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+.stats_section {
+    width: 100%;
+    margin-bottom: 64px;
+}
+
+.header__section {
+    h2 {
+        font-size: 23px;
+        line-height: 32px;
+        font-weight: 600;
+        color: var(--color-main);
+        margin-top: 0;
+        margin-bottom: 24px;
+        span {
+            font-weight: 400 !important;
+            font-size: inherit;
+            line-height: inherit;
+        }
+    }
+}
+
+.full-width {
+    width: 100%;
+}
+
+.stats_dashboard {
+    display: grid;
+    grid-template-columns: 880px 496px;
+    grid-column-gap: 118px;
+    align-self: start;
+}
+
+.table_header {
+    width: 100%;
+    height: 40px;
+    display: grid;
+    grid-template-columns: 376px 112px 112px 112px 68px;
+    grid-column-gap: 24px;
+    text-align: right;
+    white-space: nowrap;
+    margin-bottom: 8px;
+    .header_cell {
+        width: 100%;
+        height: 40px;
+        display: grid;
+        span {
+            align-self: center;
+            justify-self: end;
+            color: var(--color-main);
+            font-size: 13px;
+            line-height: 24px;
+            letter-spacing: .4px;
+            font-weight: 500;
+            text-transform: uppercase;
+        }
+    }
+}
+
+.stats_table {
+    width: 100%;
+    //  border: 1px solid #eee;
+}
+
+.stats_cards {
+    width: 100%;
+    // border: 1px solid #eee;
+    width: 496px;
+    display: grid;
+    grid-template-columns: 224px 224px;
+    grid-column-gap: 48px;
+    margin-top: -20px;
+}
+
+.stats_cards__row-one {
+    grid-template-rows: 168px;
+}
+
+.stats_cards__row-two {
+    grid-template-rows: 168px 168px;
+    grid-row-gap: 32px;
+}
+
+.department-section {
+    margin-bottom: 56px;
+    // margin-bottom: calc(32px * var(--multiply-unit-dev));
+}
+
+.dashboard--summary {
+    // padding: 0 calc(8px * var(--multiply-unit-dev));
+    position: relative;
+    display: flex;
+    .summary--left {
+        width: auto;
+        position: relative;
+        padding-right: 176px;
+        //padding-right: calc(72px * var(--multiply-unit-dev));
+        .cards-row-two {
+            grid-template-rows: 200px 200px;
+            grid-row-gap: 24px;
+        }
+        .cards-row-one {
+            grid-template-rows: 200px;
+        }
+        .cards-wrapper {}
+    }
+    // here
+    .summary--right {
+        width: 880px;
+        height: auto;
+        position: relative;
+        .leaderboard {
+            width: 100%;
+            height: auto;
+            position: relative;
+            padding-top: 8px;
+        }
+        .table-head {
+            width: 100%;
+            height: 56px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-columns: 368px 128px 96px 96px 64px;
+            grid-column-gap: 32px;
+            align-self: start;
+            .head-col {
+                font-size: 15px;
+                line-height: 40px;
+                font-weight: 500;
+                height: 40px;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                padding-top: 4px;
+                color: var(--color-main);
+            }
+        }
+    }
+}
+
+@mixin text-crop-number($line-height: 1.14, $top-adjustment: 0px, $bottom-adjustment: 0px) {
+    // Configured in Step 1
+    $top-crop: 12;
+    $bottom-crop: 8;
+    $crop-font-size: 56;
+    $crop-line-height: 1.14;
+    // Apply values to calculate em-based margins that work with any font size
+    $dynamic-top-crop: max(($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
+    $dynamic-bottom-crop: max(($bottom-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
+    // Mixin output
+    line-height: $line-height;
+    &::before,
+    &::after {
+        content: '';
+        display: block;
+        height: 0;
+        width: 0;
+    }
+    &::before {
+        margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
+    }
+    &::after {
+        margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
+    }
+}

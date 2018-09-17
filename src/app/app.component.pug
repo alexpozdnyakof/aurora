@@ -1,0 +1,42 @@
+div(class='parent-root theme-light')
+    section(class='wrapper')
+
+        header(class='header__global')
+            <!--rosa-message-->
+
+        section(class='container')
+            div(class='logo full-width')
+                img(src="assets/logo.svg")
+            section(class='stats_section')
+                header(class='header__section')
+                    h2 Открытые счета: {{updateDate | date:'d LLL HH:mm'}}
+                div(class='stats_dashboard')
+                    div(class='stats_table' '*ngIf'="ManagerSales")
+                        div(class='table_header')
+                            div
+                            each value in ['Сегодня', 'Месяц', 'Run Rate']
+                                div(class='header_cell')
+                                    span=value
+                        rosa-tablerow('*ngFor'="let manager of ManagerSales; index as i;"  '[index]'="i" '[username]'="manager?.Branch_District" '[userpic]'="'assets/avatar.jpg'" '[value]'="[manager?.fct, manager?.pln, manager?.fct_today_opn, manager?.fct_today_in_work, manager?.rr]" '[place]'="manager?.rn")
+                    div(class='stats_cards stats_cards__row-two' '*ngIf'="bankSales")
+                            rosa-card('[value]' = "bankSales?.fct_today_opn" '[title]' = "'сегодня'")
+                            rosa-card('[value]' = "bankSales?.fct" '[title]' = "'Месяц Факт'")
+                            rosa-card('[value]' = "bankSales?.fct_today_in_work" '[title]' = "'Middle'")
+                            rosa-card('[value]' = "bankSales?.rr" '[title]' = "'Run Rate'")
+
+            section(class='stats_section')
+                header(class='header__section')
+                    h2 Кредитование: {{updateDate | date:'d MMM HH:mm'}}
+                div(class='stats_dashboard')
+                    div(class='stats_table' '*ngIf'="ManagerLoans")
+                        div(class='table_header')
+                            div
+                            each value in ['', 'План/Факт', 'Run Rate']
+                                div(class='header_cell')
+                                    span=value
+                        rosa-tablerow('*ngFor'="let manager of ManagerLoans; index as i;"  '[index]'="i" '[username]'="manager?.Branch_District" '[userpic]'="'assets/avatar.jpg'" '[value]'="[manager?.fct, manager?.pln, '', '', manager?.rr]" '[place]'="manager?.rn")
+                    div(class='stats_cards stats_cards__row-two' '*ngIf'="bankLoans")
+                            rosa-card('[value]' = "bankLoans?.fct" '[title]' = "'Месяц Факт млн.'")
+                            rosa-card('[value]' = "bankLoans?.pln" '[title]' = "'Месяц План млн.'")
+                            rosa-card('[value]' = "bankLoans?.rr" '[title]' = "'Run Rate'")
+                            rosa-card('[value]' = "bankLoans?.val_left" '[title]' = "'Дельта млн.'")
