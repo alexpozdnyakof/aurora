@@ -1,57 +1,64 @@
-@mixin text-crop-number($line-height: 1.14, $top-adjustment: 0px, $bottom-adjustment: 0px) {
-    // Configured in Step 1
-    $top-crop: 12;
-    $bottom-crop: 8;
-    $crop-font-size: 56;
-    $crop-line-height: 1.14;
-    // Apply values to calculate em-based margins that work with any font size
-    $dynamic-top-crop: max(($top-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
-    $dynamic-bottom-crop: max(($bottom-crop + ($line-height - $crop-line-height) * ($crop-font-size / 2)), 0) / $crop-font-size;
-    // Mixin output
-    line-height: $line-height;
-    &::before,
-    &::after {
-        content: '';
-        display: block;
-        height: 0;
-        width: 0;
-    }
-    &::before {
-        margin-bottom: calc(-#{$dynamic-top-crop}em + #{$top-adjustment});
-    }
-    &::after {
-        margin-top: calc(-#{$dynamic-bottom-crop}em + #{$bottom-adjustment});
-    }
-}
-
 .card {
-    width: 100%;
-    height: 100%;
-    border-radius: 8px;
+    width: 375px;
+    height: 210px;
+    border-radius: 4px;
+    text-align: center;
     background-color: var(--card-color);
     box-shadow: var(--card-shadow);
     position: relative;
-    .title {
+    margin-bottom: 40px;
+    overflow: hidden;
+    &:after {
+        content: '';
         position: absolute;
-        font-size: 13px;
-        line-height: 32px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: .4px;
-        color: var(--color-main);
-        top: 24px;
-        left: 32px;
+        top: 0;
+        left: -200%;
+        width: 200%;
+        height: 100%;
+        transform: skewX(-20deg);
+        background-image: linear-gradient(to right, transparent, var(--shine-color), transparent);
     }
     .value {
         position: absolute;
-        bottom: 40px;
-        left: 32px;
+        top: 40px;
+        width: 100%;
+        text-align: center;
         span {
-            font-size: 56px;
-            line-height: 64px;
+            font-size: 76px;
+            line-height: 90px;
             font-weight: 500;
-            letter-spacing: -1px;
-            color: #3B3C40;
+            letter-spacing: 2px;
+            color: var(--color-main);
         }
+    }
+    .title {
+        width: 100%;
+        text-align: center;
+        position: absolute;
+        font-size: 29px;
+        line-height: 35px;
+        font-weight: 300;
+        color: var(--color-main);
+        bottom: 30px;
+        text-transform: lowercase;
+    }
+}
+
+.flip {
+    display: inline-block;
+    font-size: 29px;
+    line-height: 35px;
+    font-weight: 300;
+    color: var(--color-main);
+}
+
+.changed:after {
+    animation: shine 1.8s ease;
+    animation-iteration-count: 3;
+}
+
+@keyframes shine {
+    100% {
+        left: 200%;
     }
 }

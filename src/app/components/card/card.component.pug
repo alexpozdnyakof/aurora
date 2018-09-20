@@ -1,4 +1,4 @@
-div(class='card')
-  div(class='title') {{title}}
+div(class='card' '[ngClass]'= " isChanged ? 'changed' : ''")
   div(class='value')
-    span {{value | numbers }}
+    span(class='value-container') {{_value | numbers }}
+  div(class='title') {{title}}

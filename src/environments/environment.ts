@@ -4,10 +4,10 @@
 
 export const environment = {
   production: false,
-  loanManagers: 'http://localhost:8088/api/stats/loans_managers', // 8088
-  loanBank: 'http://localhost:8088/api/stats/loans_bank',
-  accountManagers: 'http://localhost:8088/api/stats/accounts_managers',
-  accountBank: 'http://localhost:8088/api/stats/accounts_bank',
+  loanManagers: 'http://localhost:8000/api/stats/loans_managers', // 8088
+  loanBank: 'http://localhost:8000/api/stats/loans_bank',
+  accountManagers: 'http://localhost:8000/api/stats/accounts_managers',
+  accountBank: 'http://localhost:8000/api/stats/accounts_bank',
 };
 /*
  * For easier debugging in development mode, you can import the following file

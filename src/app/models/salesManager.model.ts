@@ -6,6 +6,7 @@ export class SalesManager {
     fct_today_in_work: number;
     rn: number;
     rr: string;
+    avatar: string;
   }
 
 

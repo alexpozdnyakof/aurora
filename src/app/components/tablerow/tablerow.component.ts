@@ -18,12 +18,15 @@ export class TablerowComponent implements OnInit {
   @Input()
   public place: any;
   @Input()
+  public runrate: string;
+  @Input()
   public manager: SalesManager;
 
   constructor() { }
 
   ngOnInit() {
-    console.log(this.username);
+   // this.userpic = `assets/${this.userpic}`;
+    // console.log(this.username);
   }
 
 }

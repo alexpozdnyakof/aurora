@@ -6,5 +6,8 @@ export class Sales {
     rr: string;
     val_left: number;
   }
-
-
+/*
+  export interface SalesStore {
+    store: Sales[];
+}
+*/

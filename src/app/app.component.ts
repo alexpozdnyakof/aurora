@@ -15,36 +15,67 @@ import { LoanManager } from '@app/models/loanManager.model';
 export class AppComponent implements OnInit {
   title = 'aurora';
   public data: any[];
+  public interval: any;
+  public updateDate: any;
   public bankSales: Sales;
   public ManagerSales: SalesManager[] = [];
   public bankLoans: Loans;
   public ManagerLoans: LoanManager[] = [];
-
-
+  public BankStats$: any;
+  public SalesManagers$: any;
+  public LoansManagers$: any;
+  public LoansBank$: any;
+  public isChanged: boolean = false;
+  public isNight: boolean = false;
+  public order: any = 'rn';
+  public ascending = true;
   constructor(
     private _statService: DataService,
     private _message: MessageService
     ) { }
 
-    public updateDate: number;
-    public  ngOnInit(): void {
-      this._statService.getStats().subscribe(
-        ([res1, res2, res3, res4]) => {
-         this.ManagerLoans = res1;
-         this.bankLoans = res2[0];
-         this.ManagerSales = res3;
-         this.bankSales = res4[0];
-         this.updateDate = Date.now();
-        },
-        error => {
-          console.error(`Error ${JSON.stringify(error)}`);
-          this._message.warn(`Ошибка: ${JSON.stringify(error)}`);
-          return throwError(error);
-        });
 
-        setInterval(() => {
-         this.ngOnInit();
-         }, 1800000);
+
+
+
+
+    public updateBankStats(): void {
+      this.updateDate = Date.now();
+      this._statService.updateData(); // simply signal for the service to update its data stream
+    }
+
+    public ngOnInit(): void {
+      this.updateDate = Date.now();
+      this._statService.accountBank$.subscribe(data => { // subscribe once to the data stream
+        this.BankStats$ = data;
+        console.log(this.BankStats$);
+    });
+
+    this._statService.accountManagers$.subscribe(data => { // subscribe once to the data stream
+      this.SalesManagers$ = data;
+      console.log(this.SalesManagers$);
+  });
+  this._statService.loansManagers$.subscribe(data => { // subscribe once to the data stream
+    this.LoansManagers$ = data;
+    console.log(this.LoansManagers$);
+});
+
+this._statService.loansBank$.subscribe(data => { // subscribe once to the data stream
+  this.LoansBank$ = data;
+  console.log(this.LoansBank$);
+});
+
+    this.interval = setInterval(() => {
+      const date = new Date();
+     if (date.getHours() > 17) {
+      this.isChanged = true;
+      this.isNight = true;
+      setTimeout(() => { this.isChanged = false; }, 1000);
+     }
+        console.log('im working');
+        this.updateBankStats();
+    }, 15000); // 1800000
+
       }
 
     }

@@ -1,16 +1,15 @@
 div(class='table_row')
-    div(class='row--left')
+    div(class='table__intro')
         div(class='avatar')
-            img(src="assets/avatar.jpg")
-        span(class='leader-name') {{username}}
-    div(class='row--right')
-        div(class='value' '*ngIf'="value[3] != ''") {{value[3]}}/{{value[2]}}
-        div(class='value' '*ngIf'="value[3] === ''") &nbsp;
-        div(class='value') {{value[0] | numbers}}/{{value[1] | numbers}}
-        div(class='value') {{value[4]}}
-        div(class='cup' '[ngSwitch]'='place')
-            img('*ngSwitchCase'='1' src='assets/gold.svg')
-            img('*ngSwitchCase'='2' src='assets/silver.svg')
-            img('*ngSwitchCase'='3' src='assets/bronze.svg')
+            img('src'="assets/avatars/{{userpic}}")
+        span(class='username') {{username}}
+    div(class='table__values')
+        div(class='table__cell cell__values')
+            span('*ngFor' = "let val of value") {{val | numbers}}&nbsp;&nbsp;
+        div(class='table__cell cell_runrate') {{runrate | numbers}}
+        div(class='cell__award' '[ngSwitch]'='place')
+            img('*ngSwitchCase'='1' src='assets/place1.svg')
+            img('*ngSwitchCase'='2' src='assets/place2.svg')
+            img('*ngSwitchCase'='3' src='assets/place3.svg')
             div('*ngSwitchDefault')
 

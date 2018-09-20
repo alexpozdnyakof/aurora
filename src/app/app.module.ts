@@ -11,6 +11,7 @@ import { NumbersPipe } from './pipes/numbers.pipe';
 
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
+import { OrderbyPipe } from './pipes/orderby.pipe';
 registerLocaleData(localeRu);
 
 @NgModule({
@@ -19,7 +20,8 @@ registerLocaleData(localeRu);
     CardComponent,
     TablerowComponent,
     MessageComponent,
-    NumbersPipe
+    NumbersPipe,
+    OrderbyPipe
   ],
   imports: [
     BrowserModule,

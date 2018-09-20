@@ -6,15 +6,15 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class NumbersPipe implements PipeTransform {
 
   transform(value: any): any {
-    if (!value) {return ''; }
+    if (!value) {return 'N/A'; }
     if ( typeof value === 'string' ) {
-      console.log(value);
-      console.log(typeof value);
+      // console.log(value);
+      // console.log(typeof value);
       let valueFiltered: any = value.replace(/[^\d.-]/g, '');
       const specialChar: string =  value.includes('%') ? '%' : '';
       valueFiltered = valueFiltered *  1;
       valueFiltered = Math.round(valueFiltered);
-      console.log(`valueFiltered ${valueFiltered} ${typeof valueFiltered}`);
+      // console.log(`valueFiltered ${valueFiltered} ${typeof valueFiltered}`);
       return transformSmallNumbers(valueFiltered, specialChar);
     }
     value = Math.round(value);
@@ -22,13 +22,13 @@ export class NumbersPipe implements PipeTransform {
 
 
     function transformSmallNumbers(val, symbol = '') {
-
+      if( val===0 ) { return `N/A`; }
       if (val < 10) { return `0${val}${symbol}`; }
       if ( val > 10 && val  < 999) { return `${val}${symbol}`; }
       if ( val > 999 && val < 1000000 ) {
         const separated = val.toString().split(',');
         separated[0] = separated[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        console.log(separated.join(','));
+        // console.log(separated.join(','));
         return separated.join(',');
       }
       if (val > 999999) {
@@ -37,10 +37,10 @@ export class NumbersPipe implements PipeTransform {
         val = val / 1000000;
         val = val / 1000;
         val = Math.round(val);
-        console.log(val);
+       // console.log(val);
         const separated = val.toString().split(',');
         separated[0] = separated[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-        console.log(separated.join(','));
+       // console.log(separated.join(','));
         return separated.join(',');
 
       }

@@ -4,4 +4,5 @@ export class LoanManager {
     pln: number;
     rn: number;
     rr: string;
+    avatar: string;
 }
